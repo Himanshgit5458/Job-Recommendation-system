@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.google.com/search?q=resume+website+template&tbm=isch&ved=2ahUKEwjT2Y6ry-2AAxX3zqACHSTxAScQ2-cCegQIABAA&oq=resume+website+&gs_lcp=CgNpbWcQARgAMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6CAgAEIAEELEDOgsIABCABBCxAxCDAToECAAQA1CNBliKHGCQLGgAcAB4AIABoAGIAcEJkgEEMC4xMJgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=fkLjZNOiMvedg8UPpOKHuAI&bih=619&biw=1366#imgrc=ZZ6K9xfQHKflHM'); /* Add your background image URL */
+            background-size: cover;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            border-radius: 10px 10px 0 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .upload-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .upload-form input[type="file"] {
+            padding: 10px;
+            border: none;
+            background-color: #f0f0f0;
+            width: 80%;
+        }
+        .upload-form input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .suggested-jobs {
+            margin-top: 20px;
+        }
+        .suggested-jobs h2 {
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+        .job-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .job-table th, .job-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+            border-radius: 5px;
+        }
+        .job-table th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .filter-form label {
+            font-weight: bold;
+        }
+        .filter-form select {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Job Recommendation System</h1>
+    </div>
+    <div class="container">
+        <div class="upload-form">
+            <h2>Upload your resume</h2>
+            <form method="POST" action="/submit" enctype="multipart/form-data">
+                <input type="file" name="userfile">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+        <div class="suggested-jobs">
+            <h2>Suggested Jobs</h2>
+            <div class="filter-form">
+                <label for="location-filter">Filter by Location:</label>
+                <select id="location-filter" onchange="filterJobsByLocation()">
+                    <option value="all">All Locations</option>
+                    {% for location in dropdown_locations %}
+                        <option value="{{ location }}">{{ location }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <table class="job-table">
+                <tr>
+                    <th>Position</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                </tr>
+                {% for job in job_list %}
+                    <tr>
+                        <td>{{ job['Position'] }}</td>
+                        <td>{{ job['Company'] }}</td>
+                        <td>{{ job['Location'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script>
+        function filterJobsByLocation() {
+            var locationFilter = document.getElementById("location-filter");
+            var selectedLocation = locationFilter.value;
+            var jobRows = document.querySelectorAll(".job-table tr");
+
+            for (var i = 1; i < jobRows.length; i++) {
+                var locationCell = jobRows[i].querySelector("td:nth-child(3)");
+                if (selectedLocation === "all" || locationCell.textContent === selectedLocation) {
+                    jobRows[i].style.display = "table-row";
+                } else {
+                    jobRows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
