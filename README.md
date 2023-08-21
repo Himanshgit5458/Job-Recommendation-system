@@ -13,8 +13,6 @@ The Job Recommendation System is a project that takes resumes as input and recom
 - [Workflow](#workflow)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Overview
 
