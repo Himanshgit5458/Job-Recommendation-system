@@ -56,18 +56,14 @@ The Job Recommendation System is designed to assist job seekers in finding the m
 
 ### Installation
 
-1. Clone the repository:
-   
-git clone https://github.com/yourusername/job-recommendation-system.git
+1. Clone the repository:  'git clone https://github.com/Himanshgit5458/job-recommendation-system.git'
 
-2. Install required Python packages:
-
-pip install -r requirements.txt
+2. Install required Python packages: 'pip install -r requirements.txt'
 
 ## Usage
 
 1. Run the Flask app:
-2. 
+   
 2. Open a web browser and navigate to `http://localhost:5000`.
 
 3. Upload your resume using the provided form.
